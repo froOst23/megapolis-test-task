@@ -1,0 +1,32 @@
+<div style="display: flex;">
+    <span>
+        <h2>Навигация</h2>
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="/login/">login</a></li>
+            <li><a href="/logout/">logout</a></li>
+            <h3>admin</h3>
+            <li><a href="/admin/">admin</a></li>
+            <h3>API</h3>
+            <li><a href="/api/auth/">auth</a></li>
+            <li><a href="/api/contract/">contract</a></li>
+            <li><a href="/api/position">position</a></li>
+            <li><a href="/api/permissioncontract/">permissioncontract</a></li>
+            <li><a href="/api/subsidiary/">subsidiary</a></li>
+            <li><a href="/api/subcontractor/">subcontractor</a></li>
+        </ul>
+    </span>
+    <span>
+        {% for i in subsidiary_model %}
+            {% if i.user == request.user %}
+            <h2>Пользователь: {{ i.user}} | {{ i.position }}</h2>
+            <h4>Доступные договоры:</h4>
+            {% for contract in i.position.contracts.all %}
+            <ul>
+                <li>{{ contract }}</li>
+            </ul>
+            {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </span>    
+</div>
